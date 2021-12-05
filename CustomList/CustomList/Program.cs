@@ -9,7 +9,7 @@ namespace CustomList
         {
             CustomList<int> c = new CustomList<int>();
 
-            for (var i = 1; i < 6; i++)
+            for (var i = 1; i < 3; i++)
             {
                 c.Add(i);
             }
@@ -27,6 +27,15 @@ namespace CustomList
 
             c.DeleteAt(2);
             Dist(c);
+
+            // c.DeleteAt(3);
+            // Dist(c);
+
+            // c.DeleteAt(4);
+            // Dist(c);
+            // c.DeleteAt(2);
+            // Dist(c);
+            Console.WriteLine(c.Capacity);
         }
 
         public static void Dist<T>(CustomList<T> list)

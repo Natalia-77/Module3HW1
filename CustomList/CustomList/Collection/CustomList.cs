@@ -25,6 +25,14 @@ namespace Module3HW1.Collection
             }
         }
 
+        public int Capacity
+        {
+            get
+            {
+                return _capacity;
+            }
+        }
+
         public T this[int index]
         {
             get
@@ -41,25 +49,36 @@ namespace Module3HW1.Collection
             }
         }
 
-        public void Resize()
+        public void ResizeAddMethod()
         {
-            var resized = new T[_capacity * 2];
-            for (var i = 0; i < _capacity; i++)
+            if (_size == _capacity)
             {
-                resized[i] = _data[i];
-            }
+                var resized = new T[_capacity * 2];
+                for (var i = 0; i < _capacity; i++)
+                {
+                    resized[i] = _data[i];
+                }
 
-            _data = resized;
-            _capacity = _capacity * 2;
+                _data = resized;
+                _capacity = _capacity * 2;
+            }
+        }
+
+        public void ResizeDelMethod()
+        {
+            if (_size < _capacity / 2)
+            {
+                var newcapacity = _capacity / 2;
+                var temp = new T[newcapacity];
+                Array.Copy(_data, temp, newcapacity);
+                _data = new T[newcapacity];
+                Array.Copy(temp, _data, newcapacity);
+            }
         }
 
         public void Add(T newElement)
         {
-            if (_size == _capacity)
-            {
-                Resize();
-            }
-
+            ResizeAddMethod();
             _data[_size++] = newElement;
         }
 
@@ -67,11 +86,7 @@ namespace Module3HW1.Collection
         {
             foreach (var item in range)
             {
-                if (_size == _capacity)
-                {
-                    Resize();
-                }
-
+                ResizeAddMethod();
                 Add(item);
             }
         }
@@ -79,10 +94,7 @@ namespace Module3HW1.Collection
         public void InsertAt(T newElement, int index)
         {
             IndexOutOfRange(index);
-            if (_size == _capacity)
-            {
-                Resize();
-            }
+            ResizeAddMethod();
 
             for (var i = _size; i > index; i--)
             {
@@ -103,6 +115,7 @@ namespace Module3HW1.Collection
 
             _data[_size - 1] = default(T);
             _size--;
+            ResizeDelMethod();
         }
 
         public void Clear()
