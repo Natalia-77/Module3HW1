@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using Module3HW1.Comparer;
 
 namespace Module3HW1.Collection
 {
@@ -106,7 +107,7 @@ namespace Module3HW1.Collection
             _size++;
         }
 
-        public void DeleteAt(int index)
+        public void RemoveAt(int index)
         {
             IndexOutOfRange(index);
             for (var i = index + 1; i < _size - 1; i++)
@@ -119,9 +120,23 @@ namespace Module3HW1.Collection
             ResizeDelMethod();
         }
 
-        public void Sort(IComparer<T> comparer)
+        public bool Remove(T item)
         {
-            Array.Sort(_data, 0, Capacity, comparer);
+            for (var i = 0; i < _capacity; i++)
+            {
+                if (_data[i].Equals(item))
+                {
+                    RemoveAt(i);
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        public void Sort()
+        {
+            Array.Sort(_data, new ListComparer<T>());
         }
 
         public void Clear()

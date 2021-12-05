@@ -2,15 +2,15 @@
 
 namespace Module3HW1.Comparer
 {
-    public class ListComparer : IComparer<int>
+    public class ListComparer<T> : IComparer<T>
     {
-        public int Compare(int first, int second)
+        public int Compare(T first, T second)
         {
-            if (first > second)
+            if (first.GetHashCode() > second.GetHashCode())
             {
                 return 1;
             }
-            else if (first == second)
+            else if (first.GetHashCode() == second.GetHashCode())
             {
                 return 0;
             }
