@@ -73,6 +73,7 @@ namespace Module3HW1.Collection
                 Array.Copy(_data, temp, newcapacity);
                 _data = new T[newcapacity];
                 Array.Copy(temp, _data, newcapacity);
+                _capacity = newcapacity;
             }
         }
 
@@ -116,6 +117,11 @@ namespace Module3HW1.Collection
             _data[_size - 1] = default(T);
             _size--;
             ResizeDelMethod();
+        }
+
+        public void Sort(IComparer<T> comparer)
+        {
+            Array.Sort(_data, 0, Capacity, comparer);
         }
 
         public void Clear()

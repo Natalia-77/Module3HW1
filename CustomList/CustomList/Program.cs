@@ -1,5 +1,6 @@
 ﻿using System;
 using Module3HW1.Collection;
+using Module3HW1.Comparer;
 
 namespace CustomList
 {
@@ -8,10 +9,10 @@ namespace CustomList
         public static void Main(string[] args)
         {
             CustomList<int> c = new CustomList<int>();
-
-            for (var i = 1; i < 3; i++)
+            var rand = new Random();
+            for (var i = 0; i < 4; i++)
             {
-                c.Add(i);
+                c.Add(rand.Next(1, 15));
             }
 
             Dist(c);
@@ -28,14 +29,17 @@ namespace CustomList
             c.DeleteAt(2);
             Dist(c);
 
-            // c.DeleteAt(3);
-            // Dist(c);
+            c.DeleteAt(3);
+            Dist(c);
 
-            // c.DeleteAt(4);
-            // Dist(c);
-            // c.DeleteAt(2);
-            // Dist(c);
+            c.DeleteAt(4);
+            Dist(c);
+            c.DeleteAt(2);
+            Dist(c);
             Console.WriteLine(c.Capacity);
+
+            // c.Sort(new ListComparer());
+            // Dist(c);
         }
 
         public static void Dist<T>(CustomList<T> list)
